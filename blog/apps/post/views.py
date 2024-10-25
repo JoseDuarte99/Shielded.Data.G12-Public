@@ -23,7 +23,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'posts/posts.html'
     context_object_name = 'posts'
-    paginate_by = 6  # Muestra 10 objetos por página
+    paginate_by = 4  # Muestra 4 objetos por página
 
 
 # DETALLE DE UN POST
