@@ -39,7 +39,7 @@ En lineas generales podriamos comentar que el sitio cuanta con las siguientes fu
   - Categoría.
   - Antigüedad (asc y desc).
   - Orden alfabético (asc y desc).
-  - 
+    
  • Registrarse, loguearse y desloguearse.
 
  • Perfil del usuario.
