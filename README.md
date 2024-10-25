@@ -29,17 +29,17 @@ Por ultimo, es valido comentar, que el Administrador Principal aparte de poder r
 
 En lineas generales podriamos comentar que el sitio cuanta con las siguientes funciones, sin tener encuenta el tipo de usuario:
 
-• Crear, Leer, Editar y Eliminar artículos.
-• Crear, Leer, Editar y Eliminar comentarios.
-• Crear, Leer, Editar y Eliminar etiquetas.
-• Filtrar publicaciones por:
- - Categoría.
- - Antigüedad (asc y desc).
- - Orden alfabético (asc y desc).
-• Registrarse, loguearse y desloguearse.
-• Perfil del usuario.
-• Formulario de consultas.
-• Administrador de usuarios.
+ • Crear, Leer, Editar y Eliminar artículos.
+ • Crear, Leer, Editar y Eliminar comentarios.
+ • Crear, Leer, Editar y Eliminar etiquetas.
+ • Filtrar publicaciones por:
+  - Categoría.
+  - Antigüedad (asc y desc).
+  - Orden alfabético (asc y desc).
+ • Registrarse, loguearse y desloguearse.
+ • Perfil del usuario.
+ • Formulario de consultas.
+ • Administrador de usuarios.
 
 
 ## Enlace al Sitio Web
