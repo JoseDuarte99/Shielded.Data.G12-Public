@@ -27,6 +27,19 @@ Si se te asigna el rol de staff, ademas podrias:
 
 Por ultimo, es valido comentar, que el Administrador Principal aparte de poder realizar todas las acciones mensionadas, tambien cuenta con un "administrador de usuario", accessible unicamente por el, para poder llevar un control de todos los usuarios registrados en el sitio web y editar algunos aspectos, en caso de que se requiera.
 
+En lineas generales podriamos comentar que el sitio cuanta con las siguientes funciones, sin tener encuenta el tipo de usuario:
+• Crear, Leer, Editar y Eliminar artículos.
+• Crear, Leer, Editar y Eliminar comentarios.
+• Crear, Leer, Editar y Eliminar etiquetas.
+• Filtrar publicaciones por:
+ - Categoría.
+ - Antigüedad (asc y desc).
+ - Orden alfabético (asc y desc).
+• Registrarse, loguearse y desloguearse.
+• Perfil del usuario.
+• Formulario de consultas.
+• Administrador de usuarios.
+
 
 ## Enlace al Sitio Web
 https://shieldeddatag12.pythonanywhere.com/
