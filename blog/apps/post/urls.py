@@ -21,6 +21,10 @@ urlpatterns = [
           CategoryDeleteView.as_view(), name='category_delete'),
      path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
      path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
+     
+     
+     path('tags',TagsListView.as_view(), name='tags'),
      path('tags_create', TagsCreateView.as_view(), name='tags-create'),
+     path('tags/<int:pk>/delete/', TagsDeleteView.as_view(), name='tags-delete'),
 
 ]

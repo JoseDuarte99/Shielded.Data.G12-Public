@@ -9,22 +9,23 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-content">
-                        <h4>Categorias</h4>
-                        <h2>¡Hacemos tu busqueda mas facil!</h2>
+                        <h4>Etiquetas</h4>
+                        <h2>¡Crea las etiquetas que creas necesarias!</h2>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-<!-- Banner Ends Here -->
+    <!-- Banner Ends Here -->
+
 
     <section class="container py-5">
         <div class="row text-center pt-3">
             <div class="col-lg-1">
                 <!-- Formulario para crear una nueva categoría -->
                 {% if user.is_staff %}
-                    <form method="post" action="{% url 'apps.posts:category-create' %}">
+                    <form method="post" action="{% url 'apps.posts:tags-create' %}">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit" class="btn btn-success">Crear</button>
@@ -32,31 +33,30 @@
                 {% endif %}
             </div>
             <br><br>
+            
         </div>
         <div class="row">
-            {% for category in categorys %}
+            {% for tag in tags %}
                 <div class="col-12 mb-3">
                     <div class="category-item text-center">
-                        <a href="{% url 'apps.posts:post_category' pk=category.pk %}">
-                            <h4 class="mt-3 mb-3">{{ category.name }}</h4>
-                        </a>
+                        
+                            <h4 class="mt-3 mb-3">{{ tag.name  }}</h4>
+                        
                         {% if user.is_staff %}
-                            <a class="btn btn-danger" href="{% url 'apps.posts:category_delete' pk=category.pk %}">Eliminar</a>
+                            <a class="btn btn-danger" href="{% url 'apps.posts:tags-delete' pk=tag.pk%}">Eliminar</a>
                         {% endif %}
                     </div>
                 </div>
             {% empty %}
                 <div class="col-12 text-center">
-                    <h3>No hay categorías</h3>
+                    <h3>No hay etiquetas</h3>
                 </div>
             {% endfor %}
         </div>
     </section>
     
+
+
+
+
 {% endblock %}
-
-
-
-
-
-

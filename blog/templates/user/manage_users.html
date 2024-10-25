@@ -22,9 +22,11 @@
 <!-- Banner End Here -->
 
 <section class="contact-us">
-    <div class="container_manage">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="down-contact">
-                    <table class="user-table">
+                    <table class="user-table table-responsive">
                         <thead>
                             <tr>
                                 <th class="user-table-header">Perfil</th>
@@ -41,8 +43,9 @@
                         </thead>
                         <tbody>
                             {% for user in users %}
+                                {% if not user.username == "SuperUser" %}
                             <tr class="user-table-row">
-                                <td>
+                                <td class="user-table-cell d-flex align-items-center">
                                     <img class="rounded-circle shadow-2-strong me-3 p-1" src="{{ user.image.url }}" alt="avatar" width="50" height="50"/>
                                 </td>   
                                 <td class="user-table-cell">{{ user.id }}</td>
@@ -51,17 +54,18 @@
                                 <td class="user-table-cell">{{ user.first_name }}</td>
                                 <td class="user-table-cell">{{ user.last_name }}</td>
                                 <td class="user-table-cell">{{ user.date_joined }}</td>
-                                <td class="user-table-cell">
+                                <td class="user-table-cell d-none d-md-table-cell">
                                     <input type="checkbox" name="is_staff" {% if user.is_staff %}checked{% endif %}>
                                 </td>
-                                <td class="user-table-cell">
+                                <td class="user-table-cell d-none d-md-table-cell">
                                     <input type="checkbox" name="is_active" {% if user.is_active %}checked{% endif %}>
                                 </td>
-                                {% if not user.username == 'Administrador' %}
-                                <td class="user-table-cell">
+                                {% if not user.username == 'Administrador' and not user.username == 'SuperUser' %}
+                                <td class="user-table-cell d-none d-md-table-cell">
                                     <a class="btn btn-primary" class="user-table-link" href="{% url 'apps.user:edit_user' user.id %}">Editar</a>
                                     <a class="btn btn-danger" class="user-table-link" href="{% url 'apps.user:delete_user' user.id %}">Eliminar</a>
                                 </td>
+                                {% endif %}
                                 {% endif %}
                             </tr>
                             {% endfor %}
@@ -69,6 +73,25 @@
                     </table>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
+
+<style>
+    @media (min-width: 768px) {
+      .user-table {
+        table-layout: fixed; /* Fix column widths on larger screens */
+        width: 100%; /* Ensure table fills container width */
+      }
+      .user-table-cell {
+        word-wrap: break-word; /* Allow text to wrap on larger screens */
+      }
+      .user-table th,
+      .user-table td {
+        white-space: nowrap; /* Prevent content from overflowing cells */
+      }
+    }
+  </style>
+
 
 {% endblock %}

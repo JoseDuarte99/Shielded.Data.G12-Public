@@ -3,8 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Post, Comments, Tags, Category
 from .forms import CreatePostForm, UpdatePostForm, CommentsForm
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 class StaffRequiredMixin:
@@ -12,7 +11,11 @@ class StaffRequiredMixin:
         if not request.user.is_staff:
             return redirect(reverse_lazy('apps.posts:posts'))
         return super().dispatch(request, *args, **kwargs)
+    
 
+class StaffOrLoginRequiredMixin(UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_authenticated or self.request.user.is_staff
 #  --------------------------------------- POSTS ------------------------------------------------
 
 # LISTADO DE POSTS
@@ -80,11 +83,7 @@ class PostDeleteView(StaffRequiredMixin, DeleteView):
     template_name = 'posts/post_delete.html'
     success_url = reverse_lazy('apps.posts:posts')
     pk_url_kwarg = 'id'
-    
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated or request.user.username != 'Administrador':
-            raise PermissionDenied
-        return super().dispatch(request, *args, **kwargs)
+
 
 
 #  --------------------------------------- COMENTARIOS ------------------------------------------------
@@ -103,7 +102,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
 
 # ACTUALIZACION DE UN COMENTARIO
-class CommentUpdateView(LoginRequiredMixin, UpdateView):
+class CommentUpdateView (StaffOrLoginRequiredMixin, UpdateView):
     model = Comments
     form_class = CommentsForm
     template_name = 'posts/comments_update.html'
@@ -112,13 +111,9 @@ class CommentUpdateView(LoginRequiredMixin, UpdateView):
         post_id = self.object.post.id
         return reverse_lazy('apps.posts:post_individual', kwargs={'id': post_id})
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
-
 
 # ELIMINACION DE UN COMENTARIO
-class CommentDeleteView(LoginRequiredMixin, DeleteView):
+class CommentDeleteView(StaffOrLoginRequiredMixin, DeleteView):
     model = Comments
     template_name = 'posts/comments_delete.html'
     success_url = reverse_lazy('apps.posts:post_individual')
@@ -127,9 +122,6 @@ class CommentDeleteView(LoginRequiredMixin, DeleteView):
         post_id = self.object.post.id
         return reverse_lazy('apps.posts:post_individual', kwargs={'id': post_id})
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(user=self.request.user)
 
 #  --------------------------------------- CATEGORIAS ------------------------------------------------
 
@@ -199,3 +191,19 @@ class TagsCreateView(StaffRequiredMixin, CreateView):
     template_name = 'posts/tags_create.html'
     fields = ['name']  # Ajusta los campos según tu modelo Category
     success_url = reverse_lazy('apps.posts:posts')
+
+
+class TagsDeleteView(StaffRequiredMixin, DeleteView):
+    model = Tags
+    template_name = 'posts/tags_delete.html'
+    fields = ['name']  # Ajusta los campos según tu modelo Category
+    success_url = reverse_lazy('apps.posts:posts')
+
+class TagsListView(StaffRequiredMixin,ListView):
+    model = Tags
+    template_name = 'posts/tags.html'
+    context_object_name = 'tags'
+    
+    def get_queryset(self):
+        return Tags.objects.all() 
+

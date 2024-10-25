@@ -31,10 +31,7 @@
                         <button type="submit" class="btn btn-success"> Crear Articulo </button>
                     </form>
                     &nbsp;&nbsp;
-                    <form method="POST" action="{% url 'apps.posts:tags-create' %}">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-success"> Crear Etiqueta </button>
-                    </form>
+                    <a class="btn btn-success" href="{% url 'apps.posts:tags' %}">Etiquetas</a>
                 </div>
             </div>
 
@@ -133,7 +130,9 @@
             <div class="row">
                 <form method="POST" action="{% url 'apps.posts:posts_create' %}">
                     {% csrf_token %}
+                    &nbsp;&nbsp;
                     <button type="submit" class="btn btn-success"> Crear Articulo </button>
+                    <a class="btn btn-success" href="{% url 'apps.posts:tags' %}">Etiquetas</a>
                 </form>
             </div>
         </div>

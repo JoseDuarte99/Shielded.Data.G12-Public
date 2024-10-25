@@ -11,7 +11,6 @@ from apps.user.models import User
 
 # Category
 
-
 class Category(models.Model):
     name = models.CharField(max_length=30, null=False)
 
