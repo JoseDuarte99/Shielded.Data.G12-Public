@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-d+24i1yw5_c%g=-n$m33!6bfkrqa&w@sc--^qd@hb$qutpuxg!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['ShieldedDataG12.pythonanywhere.com']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -131,13 +131,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = (os.path.join(os.path.dirname(BASE_DIR),'static'),)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR.parent / 'static'
+]
+STATIC_ROOT = '/home/ShieldedDataG12/Shielded.Data.G12/blog/staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = (os.path.join(os.path.dirname(BASE_DIR),'media'))
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/ShieldedDataG12/Shielded.Data.G12/blog/media'

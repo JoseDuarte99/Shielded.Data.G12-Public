@@ -11,7 +11,7 @@ class StaffRequiredMixin:
         if not request.user.is_staff:
             return redirect(reverse_lazy('apps.posts:posts'))
         return super().dispatch(request, *args, **kwargs)
-    
+
 
 class StaffOrLoginRequiredMixin(UserPassesTestMixin):
     def test_func(self):
@@ -23,7 +23,7 @@ class PostListView(ListView):
     model = Post
     template_name = 'posts/posts.html'
     context_object_name = 'posts'
-    paginate_by = 6  # Muestra 10 objetos por página
+    paginate_by = 4 # Muestra 4 objetos por página
 
 
 # DETALLE DE UN POST
@@ -117,7 +117,7 @@ class CommentDeleteView(StaffOrLoginRequiredMixin, DeleteView):
     model = Comments
     template_name = 'posts/comments_delete.html'
     success_url = reverse_lazy('apps.posts:post_individual')
-    
+
     def get_success_url(self):
         post_id = self.object.post.id
         return reverse_lazy('apps.posts:post_individual', kwargs={'id': post_id})
@@ -144,7 +144,7 @@ class CategoryDeleteView(StaffRequiredMixin, DeleteView):
     model = Category
     template_name = 'posts/category_delete.html'
     success_url = reverse_lazy('apps.posts:category')
-    
+
 
 # FILTAR POST POR CATEGORIA
 class PostCategoryView(ListView):
@@ -167,22 +167,22 @@ class PostAlphaAscView(ListView):
     template_name = 'posts/post_alpha.html'
     context_object_name = 'posts'
     ordering = ['title']  # Ordena los posts por el título en orden alfabético
-    
-    
+
+
 class PostDateAscView(ListView):
     model = Post
     template_name = 'posts/post_date.html'
     context_object_name = 'posts'
     ordering = ['date']  # Ordena los posts por el título en orden alfabético
-    
+
 class PostDateDesView(ListView):
     model = Post
     template_name = 'posts/post_date.html'
     context_object_name = 'posts'
     ordering = ['-date']  # Ordena los posts por el título en orden alfabético
-    
 
-    
+
+
 
 #  --------------------------------------- TAGS ------------------------------------------------
 # CREAR CATEGORIA
@@ -203,7 +203,7 @@ class TagsListView(StaffRequiredMixin,ListView):
     model = Tags
     template_name = 'posts/tags.html'
     context_object_name = 'tags'
-    
+
     def get_queryset(self):
-        return Tags.objects.all() 
+        return Tags.objects.all()
 
