@@ -1,3 +1,10 @@
+.responsive-image { /* Imagen uitlizado en About */
+    max-width: 50%;
+    height: auto;
+}
+
+
+
 .item {
     position: relative;
 }
