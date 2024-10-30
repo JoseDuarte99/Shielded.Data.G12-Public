@@ -6,6 +6,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
+#  --------------------------------------- MIXIN ------------------------------------------------
+
+# VERIFICA QUE EL USUARIO SEA STAFF
 class StaffRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -16,6 +19,8 @@ class StaffRequiredMixin:
 class StaffOrLoginRequiredMixin(UserPassesTestMixin):
     def test_func(self):
         return self.request.user.is_authenticated or self.request.user.is_staff
+
+
 #  --------------------------------------- POSTS ------------------------------------------------
 
 # LISTADO DE POSTS
@@ -139,12 +144,14 @@ class CategoryCreateView(StaffRequiredMixin, CreateView):
     fields = ['name']  # Ajusta los campos según tu modelo Category
     success_url = reverse_lazy('apps.posts:category')
 
+
 # ELIMINAR CATEGORIA
 class CategoryDeleteView(StaffRequiredMixin, DeleteView):
     model = Category
     template_name = 'posts/category_delete.html'
     success_url = reverse_lazy('apps.posts:category')
 
+#  --------------------------------------- FILTROS ------------------------------------------------
 
 # FILTAR POST POR CATEGORIA
 class PostCategoryView(ListView):
@@ -156,12 +163,7 @@ class PostCategoryView(ListView):
         return Post.objects.filter(category_id=self.kwargs['pk'])
 
 
-class PostAlphaDesView(ListView):
-    model = Post
-    template_name = 'posts/post_alpha.html'
-    context_object_name = 'posts'
-    ordering = ['-title']  # Ordena los posts por el título en orden alfabético
-
+# FILTAR POST POR ORDEN ALFABETICO ASCENDENTE
 class PostAlphaAscView(ListView):
     model = Post
     template_name = 'posts/post_alpha.html'
@@ -169,20 +171,28 @@ class PostAlphaAscView(ListView):
     ordering = ['title']  # Ordena los posts por el título en orden alfabético
 
 
+# FILTAR POST POR ORDEN ALFABETICO DESCENDENTE
+class PostAlphaDesView(ListView):
+    model = Post
+    template_name = 'posts/post_alpha.html'
+    context_object_name = 'posts'
+    ordering = ['-title']  # Ordena los posts por el título en orden alfabético
+
+
+# FILTAR POST POR FECHA DE PUBLICACION EN ORDEN ASCENDENTE
 class PostDateAscView(ListView):
     model = Post
     template_name = 'posts/post_date.html'
     context_object_name = 'posts'
-    ordering = ['date']  # Ordena los posts por el título en orden alfabético
+    ordering = ['date']  # Ordena los posts por fecha de creacion
 
+
+# FILTAR POST POR FECHA DE PUBLICACION EN ORDEN DESCENDENTE
 class PostDateDesView(ListView):
     model = Post
     template_name = 'posts/post_date.html'
     context_object_name = 'posts'
-    ordering = ['-date']  # Ordena los posts por el título en orden alfabético
-
-
-
+    ordering = ['-date']  # Ordena los posts por fecha de creacion
 
 #  --------------------------------------- TAGS ------------------------------------------------
 # CREAR CATEGORIA

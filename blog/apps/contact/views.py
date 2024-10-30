@@ -1,8 +1,10 @@
+from apps.contact.models import Contact
 from .forms import ContactAnonymousForm, ContactAuthenticatedForm
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView, DeleteView
 from django.urls import reverse_lazy
+from django.core.exceptions import PermissionDenied
 
 
 #  --------------------------------------- CONTACTO ------------------------------------------------
@@ -39,3 +41,48 @@ class ContactUsuer(CreateView):
 # CONTACTO EXITOSO
 class ContactSuccess(TemplateView):
     template_name = 'contact/contact_success.html'
+
+
+
+
+#  --------------------------------------- MENSAJES ------------------------------------------------
+
+# LISTA DE MENSAJES
+class MessagesListView(ListView):
+    model = Contact
+    template_name = 'contact/messages.html'
+    context_object_name = 'messages'
+
+        # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
+# DETALLES DEL MENSAJE
+class MessagesDetailView(DetailView):
+    model = Contact
+    template_name = 'contact/message_detail.html'
+    context_object_name = 'messages'
+    pk_url_kwarg = 'id'
+
+        # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
+# ELIMINANDO MENSAJE
+class MessagesDeleteView(DeleteView):
+    model = Contact
+    template_name = 'contact/message_delete.html'
+    success_url = reverse_lazy('apps.contact:messages')
+    pk_url_kwarg = 'id'
+
+        # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)

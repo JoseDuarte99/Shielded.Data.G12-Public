@@ -1,0 +1,79 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+{% if messages %}
+<!-- Banner Starts Here -->
+<div class="heading-page header-text">
+    <section class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-content">
+                        <h4>Buzon de Contacto</h4>
+                        <h2>¡Click sobre el asunto para los detalles!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Banner End Here -->
+
+<section class="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="down-contact">
+                    <table class="user-table table-responsive">
+                        <thead>
+                            <tr>
+                                <th class="user-table-header col-2">Nombre y Apellido</th>
+                                <th class="user-table-header col-2">Correo Electronico</th>
+                                <th class="user-table-header col-4">Asunto</th>
+                                <th class="user-table-header col-2">Fecha de Registro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for message in messages %}
+                            <tr class="user-table-row">                                  
+                                <td class="user-table-cell" >{{ message.full_name }}</td>                                
+                                <td class="user-table-cell">{{ message.email }}</td>                                
+                                <td class="user-table-cell">                                    
+                                    <a href="{% url 'apps.contact:message_detail' message.id %}" class="text-dark text-decoration-underline">{{ message.subject }}</a>                                
+                                </td>                                
+                                <td class="user-table-cell">{{ message.date }}</td>                            
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% else %}
+<!-- Banner Starts Here -->
+<div class="heading-page header-text">
+    <section class="page-heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-content">
+                        <h4>Buzon de Contacto</h4>
+                        <h2>¡Actualmente no tienes ningun mensaje!</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Banner End Here -->
+{% endif %}
+
+
+
+{% endblock %}
