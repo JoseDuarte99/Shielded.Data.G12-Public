@@ -12,8 +12,11 @@ from .models import User
 from .forms import UserAdministrationForm
 from django.core.exceptions import PermissionDenied
 
-# Create your views here.
 
+
+#  --------------------------------------- MIXIN ------------------------------------------------
+
+# VERIFICA QUE EL USUARIO SEA STAFF
 class StaffRequiredMixin:
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_staff:
@@ -33,7 +36,6 @@ class RegisterUser(CreateView):
         form.save()
         messages.success(self.request, 'Registro exitoso. Por favor, inicia sesión.')
         return super().form_valid(form)
-
 
 
 #  --------------------------------------- LOGIN Y LOGOUT ------------------------------------------------
@@ -70,6 +72,7 @@ class UserListView(ListView):
     template_name = 'user/manage_users.html'
     context_object_name = 'users'
 
+    # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
             raise PermissionDenied
@@ -83,6 +86,7 @@ class UserUpdateView(UpdateView):
     template_name = 'user/edit_user.html'
     success_url = reverse_lazy('apps.user:manage_users')
 
+    # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
             raise PermissionDenied
@@ -95,6 +99,7 @@ class UserDeleteView(DeleteView):
     template_name = 'user/confirm_delete_user.html'
     success_url = reverse_lazy('apps.user:manage_users')
 
+    # VERIFICA QUE EL USUARIO SEA EL "Administrador" O "SuperUser"
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
             raise PermissionDenied

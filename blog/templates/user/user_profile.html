@@ -22,10 +22,11 @@
 <!-- Banner End Here -->
 
 {% if user.is_authenticated %}
-    {% if user.username == 'Administrador' %}
+    {% if user.username == 'Administrador' or user.username == 'SuperUser'  %}
     <div class="post-options">
         <div class="fila">
-            <a href="{% url 'apps.user:manage_users' %}" class="btn btn-success">Administrador de Usuarios</a>
+            <a href="{% url 'apps.user:manage_users' %}" class="btn btn-secondary">Administrador de Usuarios</a>
+            <a href="{% url 'apps.contact:messages' %}" class="btn btn-secondary">Contactos de Usuarios</a>
         </div>
     </div>
     {% endif %}

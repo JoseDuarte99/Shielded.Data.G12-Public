@@ -37,15 +37,15 @@
                                 <th class="user-table-header">Apellidos</th>
                                 <th class="user-table-header">Fecha de Registro</th>
                                 <th class="user-table-header">Staff</th>
-                                <th class="user-table-header">Acciones</th>
                                 <th class="user-table-header">Activo</th>
+                                <th class="user-table-header">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for user in users %}
                                 {% if not user.username == "SuperUser" %}
                             <tr class="user-table-row">
-                                <td class="user-table-cell d-flex align-items-center">
+                                <td class="user-table-cell">
                                     <img class="rounded-circle shadow-2-strong me-3 p-1" src="{{ user.image.url }}" alt="avatar" width="50" height="50"/>
                                 </td>   
                                 <td class="user-table-cell">{{ user.id }}</td>
@@ -54,14 +54,14 @@
                                 <td class="user-table-cell">{{ user.first_name }}</td>
                                 <td class="user-table-cell">{{ user.last_name }}</td>
                                 <td class="user-table-cell">{{ user.date_joined }}</td>
-                                <td class="user-table-cell d-none d-md-table-cell">
+                                <td class="user-table-cell">
                                     <input type="checkbox" name="is_staff" {% if user.is_staff %}checked{% endif %}>
                                 </td>
-                                <td class="user-table-cell d-none d-md-table-cell">
+                                <td class="user-table-cell">
                                     <input type="checkbox" name="is_active" {% if user.is_active %}checked{% endif %}>
                                 </td>
                                 {% if not user.username == 'Administrador' and not user.username == 'SuperUser' %}
-                                <td class="user-table-cell d-none d-md-table-cell">
+                                <td class="user-table-cell">
                                     <a class="btn btn-primary" class="user-table-link" href="{% url 'apps.user:edit_user' user.id %}">Editar</a>
                                     <a class="btn btn-danger" class="user-table-link" href="{% url 'apps.user:delete_user' user.id %}">Eliminar</a>
                                 </td>

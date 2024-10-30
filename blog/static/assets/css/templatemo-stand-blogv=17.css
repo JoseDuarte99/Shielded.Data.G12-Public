@@ -12,6 +12,12 @@
     z-index: 1;
 }
 
+/* Media query para pantallas pequeñas */ 
+@media (max-width: 600px){ 
+	.overlay { height: 100%; /* Altura al 100% para resoluciones de móvil */
+	}
+}
+
 .item-content {
     position: relative;
     z-index: 2;
@@ -36,6 +42,7 @@
     background-color: #333; /* Cambia este color según tu diseño */
     color: white;
     padding: 10px;
+	text-align: center;
 }
 
 /* Estilo para las celdas de la tabla */
@@ -204,10 +211,16 @@ h1,h2,h3,h4,h5,h6 {
 	background-image: url(../images/heading-bg.jpg);
 	height: 190px;
 }
+/* Media query para pantallas pequeñas */ 
+@media (max-width: 600px){ 
+	.page-heading { padding: 50px 0px; /* Altura al 100% para resoluciones de móvil */
+	}
+}
+
 
 .page-heading .text-content h4 {
 	color: #f48840;
-	font-size: 18px;
+	font-size: 1em;
 	text-transform: uppercase;
 	font-weight: 900;
 	letter-spacing: 0.5px;
@@ -216,11 +229,16 @@ h1,h2,h3,h4,h5,h6 {
 
 .page-heading .text-content h2 {
 	color: #fff;
-	font-size: 36px;
+	font-size: 2em;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 }
+@media (max-width: 600px){ 
+	.page-heading .text-content h2 { font-size: 1em; /* Altura al 100% para resoluciones de móvil */
+	}
+}
+
 
 #preloader {
   overflow: hidden;
