@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-d+24i1yw5_c%g=-n$m33!6bfkrqa&w@sc--^qd@hb$qutpuxg!'
+SECRET_KEY = '' #INFORMACION RESGUARDADA
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -34,8 +34,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'shielded.data.g12@gmail.com'
-EMAIL_HOST_PASSWORD = 'nujyxvyrayoyvsud'
+EMAIL_HOST_USER = 'email@gmail.com' #INFORMACION RESGUARDADA
+EMAIL_HOST_PASSWORD = 'password' #INFORMACION RESGUARDADA
 
 SITE_NAME = 'Informatorio'
 
@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR.parent / 'static'
 ]
-STATIC_ROOT = '/home/ShieldedDataG12/Shielded.Data.G12/blog/staticfiles'
+STATIC_ROOT = '/home/' #INFORMACION RESGUARDADA
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -143,4 +143,4 @@ STATIC_ROOT = '/home/ShieldedDataG12/Shielded.Data.G12/blog/staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/ShieldedDataG12/Shielded.Data.G12/blog/media'
+MEDIA_ROOT = '/home/' #INFORMACION RESGUARDADA

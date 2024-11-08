@@ -15,14 +15,10 @@ urlpatterns = [
      path('alphabetical/asc', PostAlphaAscView.as_view(), name='post_alpha_asc'),
      path('date/asc', PostDateAscView.as_view(), name='post_date_asc'),
      path('date/des', PostDateDesView.as_view(), name='post_date_des'),
-     
      path('category_create', CategoryCreateView.as_view(), name='category-create'),
-     path('category_delete/<int:pk>/',
-          CategoryDeleteView.as_view(), name='category_delete'),
+     path('category_delete/<int:pk>/',CategoryDeleteView.as_view(), name='category_delete'),
      path('comments/<int:pk>/update/', CommentUpdateView.as_view(), name='comment-update'),
      path('comments/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
-     
-     
      path('tags',TagsListView.as_view(), name='tags'),
      path('tags_create', TagsCreateView.as_view(), name='tags-create'),
      path('tags/<int:pk>/delete/', TagsDeleteView.as_view(), name='tags-delete'),
