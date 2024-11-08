@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views import View 
+from django.views import View
 from django.contrib.auth import logout
 from django.views.generic import ListView, UpdateView, DeleteView
 from .models import User
@@ -104,3 +104,10 @@ class UserDeleteView(DeleteView):
         if not request.user.is_authenticated or (request.user.username != 'Administrador' and request.user.username != 'SuperUser'):
             raise PermissionDenied
         return super().dispatch(request, *args, **kwargs)
+
+        # ELIMINA LA IMAGEN DEL DIRECTORIO
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.image and self.object.image.name != "user/user-default.jpg":
+            self.object.image.delete(save=False)
+        return super().delete(request, *args, **kwargs)

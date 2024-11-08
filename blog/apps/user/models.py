@@ -11,3 +11,8 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('index')
+
+    def delete(self, using=None, keep_parents=False):
+        # Elimina la imagen del sistema de archivos
+        self.image.delete(save=False)
+        super().delete(using=using, keep_parents=keep_parents)

@@ -89,6 +89,12 @@ class PostDeleteView(StaffRequiredMixin, DeleteView):
     success_url = reverse_lazy('apps.posts:posts')
     pk_url_kwarg = 'id'
 
+        # ELIMINA LA IMAGEN DEL DIRECTORIO
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.image and self.object.image.name != 'media/post_default.png':
+            self.object.image.delete(save=False)
+        return super().delete(request, *args, **kwargs)
 
 
 #  --------------------------------------- COMENTARIOS ------------------------------------------------

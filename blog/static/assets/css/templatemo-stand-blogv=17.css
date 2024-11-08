@@ -1,3 +1,8 @@
+.responsive-image { /* Imagen uitlizado en About */
+    max-width: 50%;
+    height: auto;
+}
+
 .item {
     position: relative;
 }
@@ -12,8 +17,8 @@
     z-index: 1;
 }
 
-/* Media query para pantallas pequeñas */ 
-@media (max-width: 600px){ 
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px){
 	.overlay { height: 100%; /* Altura al 100% para resoluciones de móvil */
 	}
 }
@@ -147,7 +152,7 @@
 }
 
 
-/* 
+/*
 
 TemplateMo 551 Stand Blog
 
@@ -211,8 +216,8 @@ h1,h2,h3,h4,h5,h6 {
 	background-image: url(../images/heading-bg.jpg);
 	height: 190px;
 }
-/* Media query para pantallas pequeñas */ 
-@media (max-width: 600px){ 
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px){
 	.page-heading { padding: 50px 0px; /* Altura al 100% para resoluciones de móvil */
 	}
 }
@@ -234,7 +239,7 @@ h1,h2,h3,h4,h5,h6 {
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 }
-@media (max-width: 600px){ 
+@media (max-width: 600px){
 	.page-heading .text-content h2 { font-size: 1em; /* Altura al 100% para resoluciones de móvil */
 	}
 }
@@ -407,7 +412,7 @@ header .navbar {
 }
 .navbar .navbar-toggler {
 	border-color: #fff;
-	background-color: #f48840;	
+	background-color: #f48840;
 	height: 46px;
 	outline: none;
 	border-radius: 0px;

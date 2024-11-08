@@ -11,5 +11,10 @@ class Contact(models.Model):
     message = models.TextField()  # mensaje
     date = models.DateTimeField(default=timezone.now)  # fecha
 
+    class Meta():
+        ordering = ('-date',)
+
     def __str__(self):
         return self.full_name  # nombre_apellido
+
+
